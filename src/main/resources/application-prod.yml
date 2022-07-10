@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/lingxi
+  jpa:
+    generate-ddl: false
+    show-sql: false
+
+custom:
+  jwt-secret: ${JWT_SECRET:lingxi_jwt}

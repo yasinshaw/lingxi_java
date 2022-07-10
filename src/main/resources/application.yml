@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: dev
+    default: dev
+qiniu:
+  ak: ${QINIU_AK:lingxi}
+  sk: ${QINIU_SK:lingxi}
+  bucket: ${QINIU_SK:upload}
