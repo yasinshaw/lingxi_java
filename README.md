@@ -10,8 +10,9 @@ Ling Xi管理系统是一个基于Vue3 + Java开发的通用的后台管理系�
 ### thin部分功能
 - [x] SpringSecurity集成，基于JWT实现登录、注销、修改密码等基本功能
 - [x] 用户信息修改，密码修改
-- [ ] 文件上传
+- [x] 文件上传(七牛)
 - [ ] 权限管理功能 + 动态路由
+- [x] swagger集成
 ### main部分功能
 - [ ] 文章管理
 - [ ] 微博管理
@@ -26,6 +27,8 @@ Ling Xi管理系统是一个基于Vue3 + Java开发的通用的后台管理系�
 ```bash
 ./mvnw bootRun
 ```
+### swagger地址
+http://localhost:8080/swagger-ui/index.html#
 
 ## 配套前端代码
 后端代码使用Vue3全家桶 https://github.com/yasinshaw/lingxi
