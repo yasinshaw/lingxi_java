@@ -2,6 +2,9 @@ spring:
   profiles:
     active: dev
     default: dev
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 qiniu:
   ak: ${QINIU_AK:lingxi}
   sk: ${QINIU_SK:lingxi}

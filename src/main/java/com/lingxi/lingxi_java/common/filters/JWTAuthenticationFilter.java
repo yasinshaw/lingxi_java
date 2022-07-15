@@ -1,6 +1,7 @@
 package com.lingxi.lingxi_java.common.filters;
 
 import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.lingxi.lingxi_java.common.Constants;
 import com.lingxi.lingxi_java.common.ResponseCode;
 import com.lingxi.lingxi_java.utils.AuthenticationUtil;
 import jakarta.annotation.Resource;
@@ -18,6 +19,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.lingxi.lingxi_java.common.Constants.AUTHORIZATION;
 import static com.lingxi.lingxi_java.common.Constants.AUTH_PREFIX;
@@ -26,8 +30,8 @@ import static com.lingxi.lingxi_java.utils.HttpResponseUtil.failureResponse;
 @Component
 @Slf4j
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
-    private static final RequestMatcher LOGIN_REQUEST_MATHER =
-            new AntPathRequestMatcher("/admin/login");
+    private static final List<RequestMatcher> LOGIN_REQUEST_MATHER = Arrays.stream(Constants.AUTH_WHITELIST)
+            .map(AntPathRequestMatcher::new).collect(Collectors.toList());
     @Resource
     private AuthenticationManager authenticationManager;
 
@@ -35,8 +39,8 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(
             HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        // 如果是登录接口，就放开校验
-        if (LOGIN_REQUEST_MATHER.matches(request)) {
+        // 如果是白名单接口，就放开校验
+        if (LOGIN_REQUEST_MATHER.stream().anyMatch(x -> x.matches(request))) {
             filterChain.doFilter(request, response);
             return;
         }

@@ -6,6 +6,8 @@ import com.lingxi.lingxi_java.common.ResponseCode;
 import com.lingxi.lingxi_java.common.exceptions.BizException;
 import com.lingxi.lingxi_java.utils.AuthenticationUtil;
 import jakarta.annotation.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,5 +33,10 @@ public class AuthQueryService {
         userInfoResponse.setRoles(roles.stream().map(mapper::roleEntity2Response).collect(Collectors.toList()));
         userInfoResponse.setPermissions(permissions.stream().map(mapper::permissionEntity2Response).collect(Collectors.toList()));
         return userInfoResponse;
+    }
+
+    public Page<PermissionInfoResponse> getPermissionList(Pageable pageable) {
+        Page<Permission> permissions = permissionRepository.findAll(pageable);
+        return permissions.map(AuthMapper.mapper::permissionEntity2Response);
     }
 }

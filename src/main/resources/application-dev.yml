@@ -17,3 +17,13 @@ spring:
 
 custom:
   jwt-secret: ${JWT_SECRET:lingxi_jwt}
+springdoc:
+  api-docs:
+    version: openapi_3_0
+    path: /v3/api-docs
+  swagger-ui:
+#    config-url: /v3/api-docs/swagger-config
+    disable-swagger-default-url: false
+    url: /v3/api-docs
+    doc-expansion: none
+    query-config-enabled: true

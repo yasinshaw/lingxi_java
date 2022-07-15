@@ -12,6 +12,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 
+import static com.lingxi.lingxi_java.common.Constants.AUTH_WHITELIST;
+
 @Configuration
 @EnableWebSecurity
 public class MySpringSecurityConfig {
@@ -21,11 +23,6 @@ public class MySpringSecurityConfig {
     @Resource
     private JWTAuthenticationFilter jwtAuthenticationFilter;
 
-    private  static  final  String[]  AUTH_WHITELIST  =  {
-            "/admin/login",
-            // -- swagger ui
-            "/**"
-    };
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -37,7 +34,8 @@ public class MySpringSecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 不需要session
                 .and()
                 .authorizeHttpRequests((auth) -> auth
-                        .anyRequest().authenticated()
+                        .antMatchers(AUTH_WHITELIST).permitAll()
+                        .anyRequest().permitAll()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, LogoutFilter.class)
                 .httpBasic()
