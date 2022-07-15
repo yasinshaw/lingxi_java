@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/qiniu")
-public class QiNiuController {
+@RequestMapping("/common")
+public class CommonController {
     //设置好自己的七牛云存储的key和bucket
     @Value("${qiniu.ak}")
     private String ACCESS_KEY;
@@ -17,7 +17,7 @@ public class QiNiuController {
     @Value("${qiniu.bucket}")
     private String BUCKET;
 
-    @GetMapping("/token")
+    @GetMapping("/qiniu/token")
     public String getToken() {
         Auth AUTH = Auth.create(ACCESS_KEY, SECRETE_KEY);
         return AUTH.uploadToken(BUCKET);
