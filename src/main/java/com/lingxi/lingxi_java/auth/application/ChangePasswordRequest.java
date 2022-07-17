@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class ChangePassword {
+public class ChangePasswordRequest {
     @NotBlank
     private String oldPassword;
     @NotBlank

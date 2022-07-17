@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -74,10 +75,19 @@ public class AuthApplicationService {
     }
 
     @Transactional
-    public void changePassword(ChangePassword request) {
+    public void changePassword(ChangePasswordRequest request) {
         Long currentUserId = AuthenticationUtil.getCurrentUserId();
         User user = userRepository.findById(currentUserId).orElseThrow(() -> new BizException(ResponseCode.NO_USER));
         user.changePassword(request.getOldPassword(), request.getNewPassword());
+        userRepository.save(user);
+    }
+
+    public void createUser(CreateUserRequest request) {
+        Optional<User> existedUser = userRepository.findOneByUsername(request.getUsername());
+        if (existedUser.isPresent()) {
+            throw new BizException(ResponseCode.REPEAT_USERNAME);
+        }
+        User user = User.create(request.getUsername(), request.getPassword(), request.getAvatar(), request.getNickName());
         userRepository.save(user);
     }
 }

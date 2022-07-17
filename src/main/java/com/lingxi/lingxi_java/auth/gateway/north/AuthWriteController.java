@@ -34,8 +34,13 @@ public class AuthWriteController {
     }
 
     @PostMapping("/user/changePassword")
-    public void changePassword(@RequestBody @Validated ChangePassword request) {
+    public void changePassword(@RequestBody @Validated ChangePasswordRequest request) {
         authApplicationService.changePassword(request);
+    }
+
+    @PostMapping("/user/create")
+    public void createUser(@RequestBody @Validated CreateUserRequest request) {
+        authApplicationService.createUser(request);
     }
 
     @PostMapping("/user/updateUserRoleRelation")
