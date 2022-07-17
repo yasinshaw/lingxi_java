@@ -26,7 +26,9 @@ spring:
     defer-datasource-initialization: true
   sql:
     init:
-      mode: NEVER
+      mode: EMBEDDED
+      platform: h2
+      data-locations:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
