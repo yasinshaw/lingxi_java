@@ -39,4 +39,29 @@ public class AuthQueryService {
         Page<Permission> permissions = permissionRepository.findAll(pageable);
         return permissions.map(AuthMapper.mapper::permissionEntity2Response);
     }
+
+    public Page<RoleInfoResponse> getRoleList(Pageable pageable) {
+        Page<Role> roles = roleRepository.findAll(pageable);
+        return roles.map(AuthMapper.mapper::roleEntity2Response);
+    }
+
+    public Page<RoleInfoResponse> getRoleListByPermissionId(Pageable pageable, Long permissionId) {
+        Page<Role> roles = roleRepository.findAllByPermissionId(pageable, permissionId);
+        return roles.map(AuthMapper.mapper::roleEntity2Response);
+    }
+
+    public Page<RoleInfoResponse> getRoleListByUserId(Pageable pageable, Long userId) {
+        Page<Role> roles = roleRepository.findAllByUserId(pageable, userId);
+        return roles.map(AuthMapper.mapper::roleEntity2Response);
+    }
+
+    public Page<UserListResponse> getUserList(Pageable pageable) {
+        Page<User> users = userRepository.findAll(pageable);
+        return users.map(AuthMapper.mapper::userEntity2ListResponse);
+    }
+
+    public Page<UserListResponse> getUserListByRoleId(Pageable pageable, Long roleId) {
+        Page<User> users = userRepository.findAllByRoleId(pageable, roleId);
+        return users.map(AuthMapper.mapper::userEntity2ListResponse);
+    }
 }

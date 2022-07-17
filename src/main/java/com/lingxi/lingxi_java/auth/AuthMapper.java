@@ -3,6 +3,7 @@ package com.lingxi.lingxi_java.auth;
 import com.lingxi.lingxi_java.auth.application.PermissionInfoResponse;
 import com.lingxi.lingxi_java.auth.application.RoleInfoResponse;
 import com.lingxi.lingxi_java.auth.application.UserInfoResponse;
+import com.lingxi.lingxi_java.auth.application.UserListResponse;
 import com.lingxi.lingxi_java.auth.domain.Permission;
 import com.lingxi.lingxi_java.auth.domain.Role;
 import com.lingxi.lingxi_java.auth.domain.User;
@@ -16,6 +17,8 @@ public interface AuthMapper {
             = Mappers.getMapper(AuthMapper.class);
 
     UserInfoResponse userEntity2Response(User user);
+
+    UserListResponse userEntity2ListResponse(User user);
 
     RoleInfoResponse roleEntity2Response(Role role);
 
