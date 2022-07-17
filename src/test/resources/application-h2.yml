@@ -1,0 +1,35 @@
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:lingxi;DB_CLOSE_DELAY=-1;CASE_INSENSITIVE_IDENTIFIERS=TRUE
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        use_sql_comments: true
+        format_sql: true
+        auto_quote_keyword: true
+    generate-ddl: true
+    show-sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: NEVER
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+custom:
+  jwt-secret: ${JWT_SECRET:lingxi_jwt}
