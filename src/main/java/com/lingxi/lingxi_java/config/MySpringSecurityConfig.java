@@ -27,7 +27,7 @@ public class MySpringSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors()
-                .and()
+                .disable()
                 .csrf() // 使用jwt，关闭csrf
                 .disable()
                 .sessionManagement()

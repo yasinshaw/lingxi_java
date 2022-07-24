@@ -5,10 +5,10 @@ public class Constants {
     public static final String AUTHORIZATION = "Authorization";
     public static final String[] AUTH_WHITELIST = {
             "/admin/login",
+            "/admin/updateApiPermissions",
             // -- swagger ui
             "/swagger**/**",
             "/javainuse-openapi/**",
-            "/**",
             "**/swagger-resources/**",
             "/swagger-ui.html",
             "/v2/api-docs",

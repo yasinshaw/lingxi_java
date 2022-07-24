@@ -8,4 +8,4 @@ spring:
 qiniu:
   ak: ${QINIU_AK:lingxi}
   sk: ${QINIU_SK:lingxi}
-  bucket: ${QINIU_SK:upload}
+  bucket: ${QINIU_BUCKET:upload}
