@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/lingxi
+    type: com.mysql.cj.jdbc.MysqlDataSource
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  sql:
+    init:
+      platform: mysql
+      data-locations:
+  config:
+    activate:
+      on-profile: mysql

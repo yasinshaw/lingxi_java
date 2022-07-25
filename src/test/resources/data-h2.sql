@@ -1,0 +1,2 @@
+INSERT INTO "user" (id, created_at, created_by, updated_at, updated_by, avatar, nick_name, password, username)
+VALUES (10000, DEFAULT, DEFAULT, DEFAULT, DEFAULT, '/avatar.png', '灵希', '8b12aedc03901c59ba19a5a117e56936', 'lingxi');
