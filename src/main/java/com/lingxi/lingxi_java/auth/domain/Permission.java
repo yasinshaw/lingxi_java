@@ -37,4 +37,8 @@ public class Permission extends BaseEntity {
         this.type = type;
         this.value = value;
     }
+
+    public void updateRoles(HashSet<Role> roles) {
+        this.roles = roles;
+    }
 }

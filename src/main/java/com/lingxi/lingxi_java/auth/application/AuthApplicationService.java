@@ -128,4 +128,11 @@ public class AuthApplicationService {
         User user = User.create(request.getUsername(), request.getPassword(), request.getAvatar(), request.getNickName());
         userRepository.save(user);
     }
+
+    public void updatePermissionRoleRelation(UpdatePermissionRoleRelationRequest request) {
+        Permission permission = permissionRepository.findById(request.getPermissionId()).orElseThrow(() -> new BizException("查找不到权限"));
+        List<Role> roles = roleRepository.findAllById(request.getRoleIds());
+        permission.updateRoles(new HashSet<>(roles));
+        permissionRepository.save(permission);
+    }
 }
