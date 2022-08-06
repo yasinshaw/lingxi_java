@@ -28,7 +28,9 @@ Ling Xi管理系统是一个基于Vue3 + Java开发的通用的后台管理系�
 ./mvnw bootRun
 ```
 ### swagger地址
-http://localhost:8080/swagger-ui/index.html#
+swagger ui地址：http://localhost:8080/swagger-ui/index.html#
+
+swagger json 地址：http://localhost:8080/v3/api-docs
 
 ## 配套前端代码
 后端代码使用Vue3全家桶 https://github.com/yasinshaw/lingxi
