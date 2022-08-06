@@ -4,6 +4,7 @@ import com.lingxi.lingxi_java.auth.application.*;
 import com.lingxi.lingxi_java.common.Constants;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.constraints.NotNull;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
@@ -78,6 +79,16 @@ public class AuthWriteController {
         authApplicationService.createUser(request);
     }
 
+    @DeleteMapping("/user/delete")
+    public void deleteUser(@NotNull Long userId) {
+        authApplicationService.deleteUser(userId);
+    }
+
+    @PostMapping("/user/update")
+    public void updateUser(@RequestBody @Validated UpdateUserRequest request) {
+        authApplicationService.updateUser(request);
+    }
+
     @PostMapping("/user/updateUserRoleRelation")
     public void updateUserRoleRelation(@RequestBody @Validated UpdateUserRoleRelationRequest request) {
         authApplicationService.updateUserRoleRelation(request);
@@ -107,6 +118,11 @@ public class AuthWriteController {
     @PostMapping("/role/update")
     public void updateRole(@RequestBody @Validated UpdateRoleRequest request) {
         authApplicationService.updateRole(request);
+    }
+
+    @DeleteMapping("/role/delete")
+    public void deleteRole(@NotNull Long roleId) {
+        authApplicationService.deleteRole(roleId);
     }
 
     @PostMapping("/permission/create")

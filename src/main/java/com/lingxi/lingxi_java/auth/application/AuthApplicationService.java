@@ -150,4 +150,20 @@ public class AuthApplicationService {
         roleRepository.save(role);
 
     }
+
+    public void deleteRole(Long roleId) {
+        Role role = roleRepository.findById(roleId).orElseThrow(() -> new BizException("查找不到角色"));
+        roleRepository.delete(role);
+    }
+
+    public void deleteUser(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new BizException(ResponseCode.NO_USER));
+        userRepository.delete(user);
+    }
+
+    public void updateUser(UpdateUserRequest request) {
+        User user = userRepository.findById(request.getUserId()).orElseThrow(() -> new BizException(ResponseCode.NO_USER));
+        user.updateUserInfo(request.getNickName(), request.getAvatar());
+        userRepository.save(user);
+    }
 }

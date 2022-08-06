@@ -18,5 +18,7 @@ public interface PermissionRepository extends JpaRepository<Permission, Long> {
 
     List<Permission> findAllByType(PermissionTypeEnum type);
 
+    @Query(value = "select p.* from permission p join role_permission_relation rp on rp.permission_id = p.id " +
+            "where rp.role_id = ?", nativeQuery = true)
     Page<Permission> findAllByRoleId(Pageable pageable, Long roleId);
 }
