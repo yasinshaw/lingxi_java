@@ -34,7 +34,7 @@ public class User extends BaseEntity {
     public static User create(String username, String password, String avatar, String nickName) {
         User user = new User();
         user.setUsername(username);
-        user.setPassword(password);
+        user.setPassword(EncryptUtil.md5(password));
         user.setAvatar(avatar);
         user.setNickName(nickName);
         // todo yasin 这里给初始权限和角色
