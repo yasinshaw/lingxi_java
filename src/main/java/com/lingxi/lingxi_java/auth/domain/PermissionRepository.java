@@ -1,6 +1,8 @@
 package com.lingxi.lingxi_java.auth.domain;
 
 import com.lingxi.lingxi_java.common.enums.PermissionTypeEnum;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -16,4 +18,5 @@ public interface PermissionRepository extends JpaRepository<Permission, Long> {
 
     List<Permission> findAllByType(PermissionTypeEnum type);
 
+    Page<Permission> findAllByRoleId(Pageable pageable, Long roleId);
 }

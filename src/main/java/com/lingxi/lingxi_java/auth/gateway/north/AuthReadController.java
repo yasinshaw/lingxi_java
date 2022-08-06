@@ -36,7 +36,7 @@ public class AuthReadController {
         return authQueryService.getRoleListByPermissionId(pageable, permissionId);
     }
 
-    @GetMapping("/rolesOfUser")
+    @GetMapping("/rolesByUser")
     public Page<RoleInfoResponse> getRoleListByUserId(Pageable pageable, Long userId) {
         return authQueryService.getRoleListByUserId(pageable, userId);
     }
@@ -49,5 +49,10 @@ public class AuthReadController {
     @GetMapping("/usersByRole")
     public Page<UserListResponse> getUserListByRoleId(Pageable pageable, Long roleId) {
         return authQueryService.getUserListByRoleId(pageable, roleId);
+    }
+
+    @GetMapping("/permissionsByRole")
+    public Page<PermissionInfoResponse> getPermissionListByRoleId(Pageable pageable, Long roleId) {
+        return authQueryService.getPermissionListByRoleId(pageable, roleId);
     }
 }

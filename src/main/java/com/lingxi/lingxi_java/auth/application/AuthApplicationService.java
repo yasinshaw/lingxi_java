@@ -135,4 +135,19 @@ public class AuthApplicationService {
         permission.updateRoles(new HashSet<>(roles));
         permissionRepository.save(permission);
     }
+
+    public void updateRolePermissionRelation(UpdateRolePermissionRelationRequest request) {
+        Role role = roleRepository.findById(request.getRoleId()).orElseThrow(() -> new BizException("查找不到角色"));
+        List<Permission> permissions = permissionRepository.findAllById(request.getPermissionIds());
+        role.updatePermissions(new HashSet<>(permissions));
+        roleRepository.save(role);
+    }
+
+    public void updateRoleUserRelation(UpdateRoleUserRelationRequest request) {
+        Role role = roleRepository.findById(request.getRoleId()).orElseThrow(() -> new BizException("查找不到角色"));
+        List<User> users = userRepository.findAllById(request.getUserIds());
+        role.updateUsers(new HashSet<>(users));
+        roleRepository.save(role);
+
+    }
 }

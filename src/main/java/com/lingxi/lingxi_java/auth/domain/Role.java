@@ -48,4 +48,12 @@ public class Role extends BaseEntity {
         this.code = code;
         this.name = name;
     }
+
+    public void updatePermissions(Set<Permission> permissions) {
+        this.permissions = permissions;
+    }
+
+    public void updateUsers(Set<User> users) {
+        this.users = users;
+    }
 }

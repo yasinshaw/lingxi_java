@@ -88,6 +88,16 @@ public class AuthWriteController {
         authApplicationService.updatePermissionRoleRelation(request);
     }
 
+    @PostMapping("/user/updateRolePermissionRelation")
+    public void updateRolePermissionRelation(@RequestBody @Validated UpdateRolePermissionRelationRequest request) {
+        authApplicationService.updateRolePermissionRelation(request);
+    }
+
+    @PostMapping("/user/updateRoleUserRelation")
+    public void updateRoleUserRelation(@RequestBody @Validated UpdateRoleUserRelationRequest request) {
+        authApplicationService.updateRoleUserRelation(request);
+    }
+
 
     @PostMapping("/role/create")
     public Long createRole(@RequestBody @Validated CreateRoleRequest request) {

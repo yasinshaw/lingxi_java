@@ -40,6 +40,11 @@ public class AuthQueryService {
         return permissions.map(AuthMapper.mapper::permissionEntity2Response);
     }
 
+    public Page<PermissionInfoResponse> getPermissionListByRoleId(Pageable pageable, Long roleId) {
+        Page<Permission> permissions = permissionRepository.findAllByRoleId(pageable, roleId);
+        return permissions.map(AuthMapper.mapper::permissionEntity2Response);
+    }
+
     public Page<RoleInfoResponse> getRoleList(Pageable pageable) {
         Page<Role> roles = roleRepository.findAll(pageable);
         return roles.map(AuthMapper.mapper::roleEntity2Response);
