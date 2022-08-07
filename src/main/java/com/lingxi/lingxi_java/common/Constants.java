@@ -5,7 +5,7 @@ public class Constants {
     public static final String AUTHORIZATION = "Authorization";
     public static final String[] AUTH_WHITELIST = {
             "/admin/login",
-            "/admin/updateApiPermissions",
+            "/admin/currentUserInfo",
             // -- swagger ui
             "/swagger**/**",
             "/javainuse-openapi/**",

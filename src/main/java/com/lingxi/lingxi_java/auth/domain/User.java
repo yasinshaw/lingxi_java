@@ -2,7 +2,9 @@ package com.lingxi.lingxi_java.auth.domain;
 
 import com.lingxi.lingxi_java.common.BaseEntity;
 import com.lingxi.lingxi_java.common.ResponseCode;
+import com.lingxi.lingxi_java.common.enums.PermissionTypeEnum;
 import com.lingxi.lingxi_java.common.exceptions.BizException;
+import com.lingxi.lingxi_java.common.exceptions.NoPermissionException;
 import com.lingxi.lingxi_java.utils.EncryptUtil;
 import com.lingxi.lingxi_java.utils.JwtUtil;
 import jakarta.persistence.*;
@@ -62,5 +64,16 @@ public class User extends BaseEntity {
             throw new BizException("旧密码不正确，请重新输入！");
         }
         this.setPassword(EncryptUtil.md5(newPassword));
+    }
+
+    public void checkApiPermission(String requestURI) throws NoPermissionException {
+        // 超级管理员
+        if (this.roles.stream().anyMatch(x -> "SUPER_ADMIN".equals(x.getCode()))) {
+            return;
+        }
+        if (this.roles.stream().flatMap(x -> x.getPermissions().stream()).filter(x -> x.getType() == PermissionTypeEnum.API).anyMatch(x -> requestURI.equals(x.getValue()))) {
+            return;
+        }
+        throw new NoPermissionException();
     }
 }

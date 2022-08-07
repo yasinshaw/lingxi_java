@@ -4,6 +4,7 @@ import com.lingxi.lingxi_java.auth.domain.*;
 import com.lingxi.lingxi_java.common.ResponseCode;
 import com.lingxi.lingxi_java.common.enums.PermissionTypeEnum;
 import com.lingxi.lingxi_java.common.exceptions.BizException;
+import com.lingxi.lingxi_java.common.exceptions.NoPermissionException;
 import com.lingxi.lingxi_java.utils.AuthenticationUtil;
 import jakarta.annotation.Resource;
 import jakarta.transaction.Transactional;
@@ -129,6 +130,7 @@ public class AuthApplicationService {
         userRepository.save(user);
     }
 
+    @Transactional
     public void updatePermissionRoleRelation(UpdatePermissionRoleRelationRequest request) {
         Permission permission = permissionRepository.findById(request.getPermissionId()).orElseThrow(() -> new BizException("查找不到权限"));
         List<Role> roles = roleRepository.findAllById(request.getRoleIds());
@@ -136,6 +138,7 @@ public class AuthApplicationService {
         permissionRepository.save(permission);
     }
 
+    @Transactional
     public void updateRolePermissionRelation(UpdateRolePermissionRelationRequest request) {
         Role role = roleRepository.findById(request.getRoleId()).orElseThrow(() -> new BizException("查找不到角色"));
         List<Permission> permissions = permissionRepository.findAllById(request.getPermissionIds());
@@ -143,6 +146,7 @@ public class AuthApplicationService {
         roleRepository.save(role);
     }
 
+    @Transactional
     public void updateRoleUserRelation(UpdateRoleUserRelationRequest request) {
         Role role = roleRepository.findById(request.getRoleId()).orElseThrow(() -> new BizException("查找不到角色"));
         List<User> users = userRepository.findAllById(request.getUserIds());
@@ -151,19 +155,29 @@ public class AuthApplicationService {
 
     }
 
+    @Transactional
     public void deleteRole(Long roleId) {
         Role role = roleRepository.findById(roleId).orElseThrow(() -> new BizException("查找不到角色"));
         roleRepository.delete(role);
     }
 
+    @Transactional
     public void deleteUser(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new BizException(ResponseCode.NO_USER));
         userRepository.delete(user);
     }
 
+    @Transactional
     public void updateUser(UpdateUserRequest request) {
         User user = userRepository.findById(request.getUserId()).orElseThrow(() -> new BizException(ResponseCode.NO_USER));
         user.updateUserInfo(request.getNickName(), request.getAvatar());
         userRepository.save(user);
+    }
+
+    @Transactional
+    public void checkApiPermission(String requestURI) throws NoPermissionException {
+        Long currentUserId = AuthenticationUtil.getCurrentUserId();
+        User user = userRepository.findById(currentUserId).orElseThrow(() -> new BizException(ResponseCode.NO_USER));
+        user.checkApiPermission(requestURI);
     }
 }

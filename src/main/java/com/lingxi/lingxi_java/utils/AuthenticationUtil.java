@@ -19,9 +19,9 @@ public class AuthenticationUtil {
         return 0L;
     }
 
-    public static void setUserId(String token) {
+    public static void setUserId(String token, Long userId) {
         SecurityContextHolder.getContext().setAuthentication(new MyAuthenticationToken(
-                token, JwtUtil.getUserIdByToken(token)
+                token, userId
         ));
     }
 }
