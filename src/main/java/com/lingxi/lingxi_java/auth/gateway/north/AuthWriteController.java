@@ -6,15 +6,16 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.NotNull;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -24,14 +25,14 @@ import java.util.stream.Collectors;
 @RequestMapping("/admin/")
 public class AuthWriteController {
 
+    private static final AntPathMatcher ANT_PATH_MATCHER = new AntPathMatcher();
+
     @Resource
     private AuthApplicationService authApplicationService;
 
     @Resource
     private HttpServletResponse httpServletResponse;
 
-    @Resource
-    private WebApplicationContext webApplicationContext;
     @Resource
     private RequestMappingHandlerMapping requestMappingHandlerMapping;
 
@@ -48,7 +49,7 @@ public class AuthWriteController {
                 return "";
             }
             String path = patternsCondition.getPatterns().stream().toList().get(0);
-            if (path.contains("api-docs") || path.contains("swagger-ui.html")) {
+            if (Arrays.stream(Constants.AUTH_WHITELIST).anyMatch(x -> ANT_PATH_MATCHER.match(x, path))) {
                 return "";
             }
             return requestMethods.stream().toList().get(0).name() + " " + path;
