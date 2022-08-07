@@ -18,7 +18,7 @@ public class Permission extends BaseEntity {
     private PermissionTypeEnum type;
     private String value;
 
-    @ManyToMany(targetEntity = Role.class, cascade = CascadeType.REMOVE)
+    @ManyToMany(targetEntity = Role.class)
     @JoinTable(name = "role_permission_relation",
             foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT),
             inverseForeignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT),

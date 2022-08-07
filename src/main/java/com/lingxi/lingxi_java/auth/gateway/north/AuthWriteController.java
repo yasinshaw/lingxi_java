@@ -47,7 +47,11 @@ public class AuthWriteController {
             if (patternsCondition == null) {
                 return "";
             }
-            return requestMethods.stream().toList().get(0).name() + " " + patternsCondition.getPatterns().stream().toList().get(0);
+            String path = patternsCondition.getPatterns().stream().toList().get(0);
+            if (path.contains("api-docs") || path.contains("swagger-ui.html")) {
+                return "";
+            }
+            return requestMethods.stream().toList().get(0).name() + " " + path;
         }).filter(StringUtils::isNoneBlank).collect(Collectors.toSet());
         authApplicationService.updateApiPermissions(permissions);
     }
