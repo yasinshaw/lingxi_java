@@ -5,18 +5,18 @@ logging:
         type:
           descriptor:
             sql: trace
+
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 123456
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/lingxi
-  jpa:
-    generate-ddl: true
-    show-sql: true
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  profiles:
+    active: h2
 
 custom:
   jwt-secret: ${JWT_SECRET:lingxi_jwt}
+
+qiniu:
+  ak: ${QINIU_AK:lingxi}
+  sk: ${QINIU_SK:lingxi}
+  bucket: ${QINIU_SK:upload}
