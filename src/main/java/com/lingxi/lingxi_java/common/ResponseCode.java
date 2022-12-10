@@ -13,7 +13,9 @@ public enum ResponseCode {
     TOKEN_CHECK_ERROR(10004, "登录状态校验失败，请重新登录！"),
     NO_USER(10005, "查找用户失败"),
     REPEAT_USERNAME(10006, "该用户已存在，用户名不能重复！"),
-    ;
+
+    // 20000 - 29999 里程碑
+    MILESTONE_NOT_EXIST(20001, "找不到里程碑");
 
     private final int code;
     private final String message;
