@@ -3,6 +3,7 @@ package com.lingxi.lingxi_java.auth.application;
 import com.lingxi.lingxi_java.auth.AuthMapper;
 import com.lingxi.lingxi_java.auth.domain.*;
 import com.lingxi.lingxi_java.common.ResponseCode;
+import com.lingxi.lingxi_java.common.enums.PermissionTypeEnum;
 import com.lingxi.lingxi_java.common.exceptions.BizException;
 import com.lingxi.lingxi_java.utils.AuthenticationUtil;
 import jakarta.annotation.Resource;
@@ -35,8 +36,11 @@ public class AuthQueryService {
         return userInfoResponse;
     }
 
-    public Page<PermissionInfoResponse> getPermissionList(Pageable pageable) {
-        Page<Permission> permissions = permissionRepository.findAll(pageable);
+    public Page<PermissionInfoResponse> getPermissionList(Pageable pageable, PermissionTypeEnum type) {
+        if (type == null) {
+            return permissionRepository.findAll(pageable).map(AuthMapper.mapper::permissionEntity2Response);
+        }
+        Page<Permission> permissions = permissionRepository.findAllPageableByType(pageable, type);
         return permissions.map(AuthMapper.mapper::permissionEntity2Response);
     }
 

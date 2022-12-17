@@ -1,6 +1,7 @@
 package com.lingxi.lingxi_java.auth.gateway.north;
 
 import com.lingxi.lingxi_java.auth.application.*;
+import com.lingxi.lingxi_java.common.enums.PermissionTypeEnum;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,8 +23,8 @@ public class AuthReadController {
     }
 
     @GetMapping("/permissions")
-    public Page<PermissionInfoResponse> getPermissionList(Pageable pageable) {
-        return authQueryService.getPermissionList(pageable);
+    public Page<PermissionInfoResponse> getPermissionList(Pageable pageable, PermissionTypeEnum type) {
+        return authQueryService.getPermissionList(pageable, type);
     }
 
     @GetMapping("/roles")

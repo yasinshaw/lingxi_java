@@ -30,6 +30,8 @@ public class MySpringSecurityConfig {
                 .disable()
                 .csrf() // 使用jwt，关闭csrf
                 .disable()
+                .cors()
+                .disable()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 不需要session
                 .and()

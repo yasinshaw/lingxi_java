@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Entity(name = "role")
+@Entity(name = "mile_stone")
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class MileStone extends BaseEntity {

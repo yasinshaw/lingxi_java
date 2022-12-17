@@ -48,7 +48,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
                 String token = buildJWTAuthenticationToken(request);
                 AuthenticationUtil.setUserId(token, JwtUtil.getUserIdByToken(token));
             } catch (Throwable e) {
-                log.warn("设置登录态失败");
+                log.warn("设置登录态失败", e);
             }
             filterChain.doFilter(request, response);
             return;
